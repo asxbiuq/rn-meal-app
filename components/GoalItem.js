@@ -1,10 +1,12 @@
-import { Text,View,StyleSheet } from "react-native"
+import { Text,View,StyleSheet,TouchableOpacity } from "react-native"
 
 export default (props) => {
   return (
-    <View style={styles.listItem}>
-      <Text>{props.title}</Text>
-    </View>
+    <TouchableOpacity onPress={props.onDelete.bind(this,props.id)}>
+      <View style={styles.listItem}>
+        <Text>{props.title}</Text>
+      </View>
+    </TouchableOpacity>
   )
 }
 
