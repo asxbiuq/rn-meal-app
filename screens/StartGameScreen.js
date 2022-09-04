@@ -52,7 +52,7 @@ export default (props) => {
       <Card style={styles.summaryContainer}>
         <BodyText>You selected:</BodyText>
         <NumberContainer>{selectedNumber}</NumberContainer>
-        <MainButton onClick={() => props.onStartGame(selectedNumber)}>
+        <MainButton onPress={() => props.onStartGame(selectedNumber)}>
           Start Game
         </MainButton>
       </Card>

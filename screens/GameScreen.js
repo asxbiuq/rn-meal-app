@@ -3,6 +3,8 @@ import { View, Text, StyleSheet,Button, Alert } from 'react-native'
 import Card from '../components/Card'
 import NumberContainer from '../components/NumberContainer'
 import DefaultStyles from '../constants/default-styles'
+import Ionicons from '@expo/vector-icons/Ionicons';
+import MainButton from '../components/MainButton'
 
 
 const generateRandomBetween = (min, max, exclude) => {
@@ -56,8 +58,14 @@ export default (props) => {
       <Text style={DefaultStyles.bodyText}>Opponent's</Text>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card style={styles.buttonContainer}>
-        <Button title='Lower' onPress={nextGuessHandler.bind(this, 'lower')}/>
-        <Button title='Greater' onPress={nextGuessHandler.bind(this, 'greater')}/>
+        <MainButton onPress={nextGuessHandler.bind(this, 'lower')}>
+          <Ionicons name='md-remove' size={24} color='white'/>
+        </MainButton>
+        <MainButton onPress={nextGuessHandler.bind(this, 'greater')}>
+          <Ionicons name='md-add' size={24} color='white'/>
+        </MainButton>
+        {/* <Button title='Lower' onPress={nextGuessHandler.bind(this, 'lower')}/>
+        <Button title='Greater' onPress={nextGuessHandler.bind(this, 'greater')}/> */}
       </Card>
     </View>
   )
