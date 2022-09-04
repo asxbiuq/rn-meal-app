@@ -4,6 +4,8 @@ import Colors from "../constants/Colors";
 import Input from "../components/Input";
 import { useState } from "react";
 import NumberContainer from "../components/NumberContainer";
+import BodyText from "../components/BodyText";
+import MainButton from "../components/MainButton";
 
 export default (props) => {
   const [enteredValue, setEnteredValue] = useState('')
@@ -48,9 +50,11 @@ export default (props) => {
   if (confirmed) {
     confirmedOutput = (
       <Card style={styles.summaryContainer}>
-        <Text>You selected:</Text>
+        <BodyText>You selected:</BodyText>
         <NumberContainer>{selectedNumber}</NumberContainer>
-        <Button title="Start Game" onPress={() => props.onStartGame(selectedNumber)}/>
+        <MainButton onClick={() => props.onStartGame(selectedNumber)}>
+          Start Game
+        </MainButton>
       </Card>
     )
   }
@@ -96,7 +100,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    marginVertical: 10
+    marginVertical: 10,
+    fontFamily: 'Montserrat'
   },
   buttonContainer: {
     flexDirection: 'row',
