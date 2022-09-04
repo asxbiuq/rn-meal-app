@@ -1,56 +1,45 @@
+import { StyleSheet, View } from 'react-native';
+import Header from './components/Header';
+import StartGameScreen from './screens/StartGameScreen';
+import GameScreen from './screens/GameScreen';
 import { useState } from 'react';
-import { StyleSheet, View, FlatList, Modal, Button } from 'react-native';
-import GoalItem from './components/GoalItem';
-import GoalInput from './components/GoalInput';
+import GameOverScreen from './screens/GameOverScreen';
 
 export default function App() {
-  const [courseGoals, setCourseGoals] = useState([])
-  const [isAddMode, setIsAddMode] = useState(false)
+  const [userNumber, setUserNumber] = useState()
+  const [guessRounds, setGuessRounds] = useState(0)
 
-  const addGoalHandler = (goalTitle) => {
-    setCourseGoals(currentGoals => [...currentGoals, 
-      {id: Math.random().toString(),value: goalTitle}
-    ])
-    setIsAddMode(false)
+  const configureNewGameHandler = () => {
+    setGuessRounds(0)
+    setUserNumber(null)
   }
 
-  const removeGoalHandler = (goalId) =>{
-    setCourseGoals(currentGoals => {
-      return currentGoals.filter((goal) => goal.id !== goalId)
-    })
+  const startGameHandler = (selectedNumber) => {
+    setUserNumber(selectedNumber)
   }
 
-  const cancelGoalAdditionHandler = () => {
-    setIsAddMode(false)
+  const gameOverHandler = (numOfRounds) => {
+    setGuessRounds(numOfRounds)
+  }
+
+  let content = <StartGameScreen onStartGame={startGameHandler}/>
+
+  if (userNumber && guessRounds <= 0) {
+    content = <GameScreen userChoice={userNumber} onGameOver={gameOverHandler}/>
+  } else if (guessRounds > 0) {
+    content = <GameOverScreen roundNumber={guessRounds} userNumber={userNumber} onRestart={configureNewGameHandler}/>
   }
 
   return (
-    <Modal >
-      <Button title='Add New Goal' onPress={()=>setIsAddMode(true)} />
-      <View style={styles.screen}>
-        <GoalInput 
-          visible={isAddMode} 
-          onAddGoal={addGoalHandler} 
-          onCancel={cancelGoalAdditionHandler}
-        />
-        <FlatList 
-          keyExtractor={(item,index) => item.id}
-          data={courseGoals}
-          renderItem={itemData => 
-            <GoalItem 
-              id={itemData.item.id}
-              title={itemData.item.value}
-              onDelete={removeGoalHandler}
-            />
-          }
-        />
-      </View>
-    </Modal>
+    <View style={styles.screen}>
+      <Header title='Guess a Number' />
+      {content}
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   screen: {
-    padding: 50
+   flex: 1
   },
 });
