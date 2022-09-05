@@ -1,67 +1,31 @@
-import { StyleSheet, View } from 'react-native';
-import Header from './components/Header';
-import StartGameScreen from './screens/StartGameScreen';
-import GameScreen from './screens/GameScreen';
-import { useState } from 'react';
-import GameOverScreen from './screens/GameOverScreen';
-import * as Font from 'expo-font'
-import { AppLoading } from 'expo'
-import { useFonts } from 'expo-font'
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import CategoriesScreen from './components/CategoriesScreen';
+import CategoryMealScreen from './components/CategoryMealScreen';
+import MealDetailScreen from './components/MealDetailScreen';
 
+const Stack = createNativeStackNavigator();
 
-export default function App() {
-  const [userNumber, setUserNumber] = useState()
-  const [guessRounds, setGuessRounds] = useState(0)
-  // const [dataLoaded, setDataLoaded] = useState(false)
-
-  const [loaded] = useFonts({
-    Montserrat: require('./assets/fonts/Montserrat-Regular.ttf'),
-  })
-
-  // if (!dataLoaded) {
-  //   return (
-  //   <AppLoading 
-  //     startAsync={fetchFonts} 
-  //     onFinish={() => setDataLoaded(true)}
-  //     onError={(err) => console.log(err)}
-  //   />
-  //   )
-  // }
-
-
-  const configureNewGameHandler = () => {
-    setGuessRounds(0)
-    setUserNumber(null)
-  }
-
-  const startGameHandler = (selectedNumber) => {
-    setUserNumber(selectedNumber)
-  }
-
-  const gameOverHandler = (numOfRounds) => {
-    setGuessRounds(numOfRounds)
-  }
-
-  let content = <StartGameScreen onStartGame={startGameHandler}/>
-
-
-
-  if (userNumber && guessRounds <= 0) {
-    content = <GameScreen userChoice={userNumber} onGameOver={gameOverHandler}/>
-  } else if (guessRounds > 0) {
-    content = <GameOverScreen roundNumber={guessRounds} userNumber={userNumber} onRestart={configureNewGameHandler}/>
-  }
-
+function App() {
   return (
-    <View style={styles.screen}>
-      <Header title='Guess a Number' />
-      {content}
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Categories" component={CategoriesScreen} options={{ 
+          title: 'Meal Categories' ,
+          headerStyle: {
+            backgroundColor: '#f4511e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },}}
+        />
+        <Stack.Screen name="CategoryMeals" component={CategoryMealScreen} />
+        <Stack.Screen name="MealDetail" component={MealDetailScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  screen: {
-   flex: 1
-  },
-});
+export default App;
