@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Button, FlatList, TouchableOpacity } from "react-native";
 import { CATEGORIES } from "../data/dummy-data";
-import CategoryGridTile from "./CategoryGridTile";
+import CategoryGridTile from "../components/CategoryGridTile";
 
 export default ({ navigation }) => {
 

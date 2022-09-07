@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Button, FlatList } from "react-native";
 import { CATEGORIES, MEALS } from "../data/dummy-data";
-import MealItem from "./MealItem";
+import MealItem from "../components/MealItem";
 
 export default ({ navigation, route }) => {
   const { categoryId } = route.params
@@ -15,10 +15,17 @@ export default ({ navigation, route }) => {
       <MealItem 
         title={itemData.item.title} 
         imageUrl={itemData.item.imageUrl}
-        onSelectMeal={()=>{}} 
         duration={itemData.item.duration}
         complexity={itemData.item.complexity}
         affordability={itemData.item.affordability}
+        onSelectMeal={()=>{
+          navigation.navigate({
+            name: 'MealDetail',
+            params: { 
+              mealId: itemData.item.id 
+            }
+          })
+        }} 
       />
     )
   }
