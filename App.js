@@ -114,10 +114,10 @@ import { MainStackNavigator } from "./navigation/StackNavigator";
 import BottomTabNavigator from "./navigation/TabNavigator";
 import DrawerNavigator from "./navigation/DrawerNavigator";
 
-const App = () => {
+const App = ({navigation}) => {
   return (
     <NavigationContainer>
-      <DrawerNavigator />
+      <DrawerNavigator/>
     </NavigationContainer>
   );
 }

@@ -1,6 +1,10 @@
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from "react-native"
+import { useLayoutEffect } from "react"
 
-export default ({onSelectMeal, title, duration, complexity, affordability, imageUrl}) => {
+export default ({onSelectMeal, title, duration, complexity, affordability, imageUrl,navigation}) => {
+
+
+
   return (
     <View style={styles.mealItem}>
       <TouchableOpacity onPress={onSelectMeal}>

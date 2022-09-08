@@ -4,14 +4,19 @@ import MealItem from "../components/MealItem";
 
 export default ({ listData, navigation }) => {
 
+  
   const renderMealItem = itemData => {
+
+    const {title, imageUrl, duration, complexity, affordability} = itemData.item
+    
     return (
       <MealItem 
-        title={itemData.item.title} 
-        imageUrl={itemData.item.imageUrl}
-        duration={itemData.item.duration}
-        complexity={itemData.item.complexity}
-        affordability={itemData.item.affordability}
+        navigation={navigation}
+        title={title} 
+        imageUrl={imageUrl}
+        duration={duration}
+        complexity={complexity}
+        affordability={affordability}
         onSelectMeal={()=>{
           navigation.navigate({
             name: 'MealDetail',

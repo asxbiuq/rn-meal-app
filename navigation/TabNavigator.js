@@ -29,12 +29,12 @@ const screenOptions = ({ route }) => ({
   tabBarActiveTintColor: 'tomato',
 })
 
-const BottomTabNavigator = () => {
+const BottomTabNavigator = ({navigation}) => {
   return (
     <Tab.Navigator  
       screenOptions={screenOptions} 
     >
-      <Tab.Screen name="Categories" component={MainStackNavigator} />
+      <Tab.Screen name="Categories" component={MainStackNavigator}/>
       <Tab.Screen name="Favorite" component={FavoriteStackNavigator} />
     </Tab.Navigator>
   );

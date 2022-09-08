@@ -13,17 +13,7 @@ export default ({ navigation, route }) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: (props) => <LogoTitle {...props} />,
-      headerRight: () => (
-       <HeaderButtons HeaderButtonsComponent={HeaderButton}>
-          <Item
-            title="Filter Meal" 
-            onPress={() => {
-              console.log('Filter Meal')
-            }}
-          />
-       </HeaderButtons>
-      ),
+      headerTitle: (props) => <LogoTitle {...props} />
     })
   }, [navigation])
 

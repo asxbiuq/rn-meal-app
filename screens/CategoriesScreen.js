@@ -1,8 +1,30 @@
 import { View, Text, StyleSheet, Button, FlatList, TouchableOpacity } from "react-native";
 import { CATEGORIES } from "../data/dummy-data";
 import CategoryGridTile from "../components/CategoryGridTile";
+import { useLayoutEffect } from "react";
+import { Ionicons } from '@expo/vector-icons';
+import {
+  HeaderButtons,
+  HeaderButton,
+  Item
+} from 'react-navigation-header-buttons';
+
+const IoniconsHeaderButton = (props) => (
+  <HeaderButton IconComponent={Ionicons} iconSize={23} {...props} />
+);
+
+
 
 export default ({ navigation }) => {
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
+          <Item title="menu" iconName="menu" onPress={() => navigation.toggleDrawer()} />
+        </HeaderButtons>
+      ),
+    })
+  }, [navigation])
 
   const renderGridItem = (itemData) => {
 
@@ -17,6 +39,8 @@ export default ({ navigation }) => {
               categoryId: itemData.item.id 
             }
           })
+          
+
       }}/>
     )
   }
