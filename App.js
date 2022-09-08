@@ -14,11 +14,10 @@ function App() {
     <NavigationContainer>
       <Tab.Navigator 
         screenOptions={
-          screenOptionsConfig
-         
+          tabScreenOptionsConfig
         }
       >
-          <Tab.Screen name="Meals" component={MealNav} />
+          <Tab.Screen name="Meals" component={MealNav} options={{headerShown: false}}/>
           <Tab.Screen name="Favorites" component={FavoritesScreen} />
       </Tab.Navigator>
     </NavigationContainer>
@@ -48,8 +47,8 @@ function MealNav() {
   );
 }
 
-const screenOptionsConfig = ({ route }) => ({
-  headerShown: false,
+const tabScreenOptionsConfig = ({ route }) => ({
+  headerShown: true,
   tabBarIcon: ({ focused, color, size }) => {
     if (route.name === 'Meals') {
       return (

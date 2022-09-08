@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end'
   },
   title: {
-    // fontFamily: '',
     fontSize: 12
   }
 })
