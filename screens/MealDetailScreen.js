@@ -1,7 +1,11 @@
 import { View, Text, StyleSheet, Button } from "react-native"
 import { MEALS } from "../data/dummy-data"
 import { useLayoutEffect } from "react"
-
+import {
+  HeaderButtons,
+  Item,
+} from 'react-navigation-header-buttons';
+import HeaderButton from "../components/HeaderButton";
 
 
 export default ({ navigation, route }) => {
@@ -18,7 +22,14 @@ export default ({ navigation, route }) => {
     navigation.setOptions({
       headerTitle: (props) => <LogoTitle {...props} />,
       headerRight: () => (
-        <Text>FAV!</Text>
+       <HeaderButtons HeaderButtonsComponent={HeaderButton}>
+          <Item
+            title="Favorite" 
+            onPress={() => {
+              console.log('Mark as favorite')
+            }}
+          />
+       </HeaderButtons>
       ),
     })
   }, [navigation])
