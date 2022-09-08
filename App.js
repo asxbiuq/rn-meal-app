@@ -1,10 +1,10 @@
-import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CategoriesScreen from './screens/CategoriesScreen';
 import CategoryMealScreen from './screens/CategoryMealScreen';
 import MealDetailScreen from './screens/MealDetailScreen';
-import Test from './screens/Test';
+
+
 const Stack = createNativeStackNavigator();
 
 function App() {
