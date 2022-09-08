@@ -54,7 +54,7 @@ const screenOptionsConfig = ({ route }) => ({
     if (route.name === 'Meals') {
       return (
         <Ionicons
-          name={'ios-information-circle-outline'}
+          name={'ios-restaurant'}
           size={size}
           color={color}
         />
