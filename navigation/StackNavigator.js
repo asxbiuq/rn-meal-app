@@ -3,9 +3,6 @@ import FavoritesScreen from '../screens/FavoritesScreen';
 import CategoryScreen from '../screens/CategoriesScreen'
 import CategoryMealScreen from '../screens/CategoryMealScreen'
 import MealDetailScreen from '../screens/MealDetailScreen'
-import HeaderButton from "../components/HeaderButton";
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import { useLayoutEffect } from 'react';
 import FiltersScreen from '../screens/FiltersScreen'
 
 const Stack = createNativeStackNavigator();

@@ -1,7 +1,5 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import TabNavigator from "./TabNavigator";
-import FiltersScreen from "../screens/FiltersScreen";
-import { useState } from "react";
 import { FilterStackNavigator } from "./StackNavigator";
 
 const Drawer = createDrawerNavigator();

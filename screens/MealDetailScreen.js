@@ -1,11 +1,9 @@
 import { View, Text, StyleSheet, Button } from "react-native"
 import { MEALS } from "../data/dummy-data"
 import { useLayoutEffect } from "react"
-import {
-  HeaderButtons,
-  Item,
-} from 'react-navigation-header-buttons';
-import HeaderButton from "../components/HeaderButton";
+import { HeaderButtons, HeaderButton, Item } from 'react-navigation-header-buttons';
+// import HeaderButton from "../components/HeaderButton";
+import { Ionicons } from '@expo/vector-icons';
 
 
 export default ({ navigation, route }) => {
@@ -18,18 +16,19 @@ export default ({ navigation, route }) => {
     )
   }
 
+  const IoniconsHeaderButton = (props) => (
+    // the `props` here come from <Item ... />
+    // you may access them and pass something else to `HeaderButton` if you like
+    <HeaderButton IconComponent={Ionicons} iconSize={23} {...props} />
+  );
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: (props) => <LogoTitle {...props} />,
       headerRight: () => (
-       <HeaderButtons HeaderButtonsComponent={HeaderButton}>
-          <Item
-            title="Favorite" 
-            onPress={() => {
-              console.log('Mark as favorite')
-            }}
-          />
-       </HeaderButtons>
+        <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
+          <Item title="star" iconName="star" onPress={() => alert('star')} color={'white'}/>
+        </HeaderButtons>
       ),
     })
   }, [navigation])
