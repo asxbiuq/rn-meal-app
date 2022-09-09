@@ -1,9 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from "react-native"
-import { useLayoutEffect } from "react"
+import DefaultText from "./DefaultText"
 
-export default ({onSelectMeal, title, duration, complexity, affordability, imageUrl,navigation}) => {
-
-
+export default ({ onSelectMeal, title, duration, complexity, affordability, imageUrl }) => {
 
   return (
     <View style={styles.mealItem}>
@@ -20,9 +18,9 @@ export default ({onSelectMeal, title, duration, complexity, affordability, image
             </ImageBackground>
           </View>
           <View style={{...styles.mealRow, ...styles.mealDetail}}>
-            <Text>{duration}m</Text>
-            <Text>{complexity.toUpperCase()}</Text>
-            <Text>{affordability.toUpperCase()}</Text>
+            <DefaultText>{duration}m</DefaultText>
+            <DefaultText>{complexity.toUpperCase()}</DefaultText>
+            <DefaultText>{affordability.toUpperCase()}</DefaultText>
           </View>
         </View>
       </TouchableOpacity>
