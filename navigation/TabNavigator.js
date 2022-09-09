@@ -1,41 +1,43 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MainStackNavigator, FavoriteStackNavigator } from "./StackNavigator";
-// import { Ionicons } from '@expo/vector-icons';
+import { Text } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
-const screenOptions = ({ route }) => ({
+const screenOptions = () => ({
   headerShown: false,
-  // tabBarIcon: ({ focused, color, size }) => {
-  //   if (route.name === 'Meals') {
-  //     return (
-  //       <Ionicons
-  //         name={'ios-restaurant'}
-  //         size={size}
-  //         color={color}
-  //       />
-  //     );
-  //   } else if (route.name === 'Favorites') {
-  //     return (
-  //       <Ionicons
-  //         name={'ios-star'}
-  //         size={size}
-  //         color={color}
-  //       />
-  //     );
-  //   }
-  // },
-  tabBarInactiveTintColor: 'gray',
-  tabBarActiveTintColor: 'tomato',
 })
 
-const BottomTabNavigator = ({navigation}) => {
+const BottomTabNavigator = () => {
   return (
     <Tab.Navigator  
       screenOptions={screenOptions} 
     >
-      <Tab.Screen name="Categories" component={MainStackNavigator}/>
-      <Tab.Screen name="Favorite" component={FavoriteStackNavigator} />
+      <Tab.Screen 
+        name="Categories" 
+        component={MainStackNavigator} 
+        options={{
+          tabBarLabel: () => <Text style={{fontSize: 5}}>Meals</Text>,
+          tabBarIcon: ({ color, size }) =>  <Ionicons
+                                              name={'restaurant'}
+                                              size={size}
+                                              color={color}
+                                            />
+        }}
+      />
+      <Tab.Screen 
+        name="Favorite" 
+        component={FavoriteStackNavigator} 
+        options={{
+          tabBarLabel: () => <Text style={{fontSize: 5}}>Favorite</Text>,
+          tabBarIcon: ({ color, size }) =>  <Ionicons
+                                              name={'star'}
+                                              size={size}
+                                              color={color}
+                                            />
+        }}
+      />
     </Tab.Navigator>
   );
 };
