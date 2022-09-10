@@ -1,12 +1,9 @@
-import { View, Text, StyleSheet, Button, Image } from "react-native"
+import { View, Text, StyleSheet, Image } from "react-native"
 import { MEALS } from "../data/dummy-data"
-import { useLayoutEffect } from "react"
-import { HeaderButtons, HeaderButton, Item } from 'react-navigation-header-buttons';
-import { Ionicons } from '@expo/vector-icons';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { ScrollView } from "react-native-gesture-handler";
 import DefaultText from "../components/DefaultText";
 import IoniconsHeaderButton from "../components/IoniconsHeaderButton";
-import useHeaderLeft from "../hooks/useHeaderLeft";
 import useHeaderTitle from "../hooks/useHeaderTitle";
 
 const ListItem = ({children}) => {

@@ -1,29 +1,48 @@
 import { View, Text, StyleSheet } from "react-native";
-import { useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import useHeaderTitle from "../hooks/useHeaderTitle";
 import IoniconsHeaderButton from "../components/IoniconsHeaderButton";
 import { HeaderButtons,Item } from 'react-navigation-header-buttons';
 import useHeaderRight from "../hooks/useHeaderRight";
 import FilterSwitch from "../components/FilterSwitch";
 
-export default ({ navigation }) => {
+
+
+export default ({ navigation, route }) => {
   const [isGlutenFree, setIsGlutenFree] = useState(false)
   const [isLactoseFree, setIsLactoseFree] = useState(false)
   const [isVegan, setIsVegan] = useState(false)
 
-  const LogoTitle = () => {
-    return (
-      <Text>'Filter Meal'</Text>
-    )
-  }
 
-  useHeaderTitle(navigation,(props) => <LogoTitle {...props} />)
+  const saveFilters = useCallback(() => {
+    const appliedFilters = {
+      glutenFree: isGlutenFree,
+      lactoseFree: isLactoseFree,
+      vegan: isVegan
+    }
+
+    console.log(appliedFilters)
+  }, [isGlutenFree, isLactoseFree, isVegan])
+
+  useEffect(()=>{
+    navigation.setParams({save: saveFilters})
+  }, [saveFilters])
+
+  useHeaderTitle(navigation,() => <Text>Filter Meal</Text>)
   
   useHeaderRight(navigation, () => (
     <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-      <Item title="save" iconName="save" onPress={() => console.log('save')} />
+      <Item 
+        title="save" 
+        iconName="save" 
+        onPress={() => {
+          console.log(route.params)
+        }}
+      />
     </HeaderButtons>
   ))
+
+
 
   return(
     <View style={styles.screen}>
