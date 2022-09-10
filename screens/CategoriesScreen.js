@@ -1,33 +1,20 @@
 import { StyleSheet, FlatList } from "react-native";
 import { CATEGORIES } from "../data/dummy-data";
 import CategoryGridTile from "../components/CategoryGridTile";
-import { useLayoutEffect } from "react";
-import { Ionicons } from '@expo/vector-icons';
-import {
-  HeaderButtons,
-  HeaderButton,
-  Item
-} from 'react-navigation-header-buttons';
-
-const IoniconsHeaderButton = (props) => (
-  <HeaderButton IconComponent={Ionicons} iconSize={23} {...props} />
-);
-
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import useHeaderLeft from "../hooks/useHeaderLeft";
+import IoniconsHeaderButton from "../components/IoniconsHeaderButton";
 
 
 export default ({ navigation }) => {
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => (
-        <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-          <Item title="menu" iconName="menu" onPress={() => navigation.toggleDrawer()} />
-        </HeaderButtons>
-      ),
-    })
-  }, [navigation])
+
+  useHeaderLeft(navigation,() => (
+    <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
+      <Item title="menu" iconName="menu" onPress={() => navigation.toggleDrawer()} />
+    </HeaderButtons>
+  ))
 
   const renderGridItem = (itemData) => {
-
     return (
       <CategoryGridTile 
         title={itemData.item.title}
@@ -39,8 +26,6 @@ export default ({ navigation }) => {
               categoryId: itemData.item.id 
             }
           })
-          
-
       }}/>
     )
   }

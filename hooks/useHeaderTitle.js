@@ -1,16 +1,9 @@
 import { useLayoutEffect } from "react";
-import { Text } from "react-native";
 
-export default (navigation,title) => {
-  const LogoTitle = () => {
-    return (
-      <Text>{title}</Text>
-    )
-  }
-
+export default (navigation,View) => {
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: (props) => <LogoTitle {...props} />
+      headerTitle: View
     })
   }, [navigation])
 }

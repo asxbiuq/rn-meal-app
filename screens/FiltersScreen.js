@@ -1,29 +1,29 @@
-import { View, Text, StyleSheet,Switch } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { useState } from "react";
 import useHeaderTitle from "../hooks/useHeaderTitle";
-import Color from '../constants/Color'
-
-const FilterSwitch = ({label,state,onChange}) => {
-  return (
-    <View style={styles.filterContainer}>
-      <Text>{label}</Text>
-      <Switch
-        value={state}
-        onValueChange={onChange}
-        trackColor={{ true: Color.primary }}
-      />
-    </View>
-  )
-} 
+import IoniconsHeaderButton from "../components/IoniconsHeaderButton";
+import { HeaderButtons,Item } from 'react-navigation-header-buttons';
+import useHeaderRight from "../hooks/useHeaderRight";
+import FilterSwitch from "../components/FilterSwitch";
 
 export default ({ navigation }) => {
   const [isGlutenFree, setIsGlutenFree] = useState(false)
   const [isLactoseFree, setIsLactoseFree] = useState(false)
   const [isVegan, setIsVegan] = useState(false)
-  const title = 'Filter Meal'
 
-  useHeaderTitle(navigation, title)
+  const LogoTitle = () => {
+    return (
+      <Text>'Filter Meal'</Text>
+    )
+  }
 
+  useHeaderTitle(navigation,(props) => <LogoTitle {...props} />)
+  
+  useHeaderRight(navigation, () => (
+    <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
+      <Item title="save" iconName="save" onPress={() => console.log('save')} />
+    </HeaderButtons>
+  ))
 
   return(
     <View style={styles.screen}>

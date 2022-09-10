@@ -1,13 +1,10 @@
 import { useLayoutEffect } from "react";
-import { Text } from "react-native";
 
-export default (navigation,left) => {
+export default (navigation,View) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerLeft: () => (
-        left
-      ),
+      headerLeft: View,
     })
   }, [navigation])
 }

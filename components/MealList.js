@@ -3,8 +3,6 @@ import MealItem from "../components/MealItem";
 
 
 export default ({ listData, navigation }) => {
-
-  
   const renderMealItem = itemData => {
 
     const {title, imageUrl, duration, complexity, affordability} = itemData.item

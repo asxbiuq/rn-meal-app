@@ -5,6 +5,9 @@ import { HeaderButtons, HeaderButton, Item } from 'react-navigation-header-butto
 import { Ionicons } from '@expo/vector-icons';
 import { ScrollView } from "react-native-gesture-handler";
 import DefaultText from "../components/DefaultText";
+import IoniconsHeaderButton from "../components/IoniconsHeaderButton";
+import useHeaderLeft from "../hooks/useHeaderLeft";
+import useHeaderTitle from "../hooks/useHeaderTitle";
 
 const ListItem = ({children}) => {
   return (
@@ -24,22 +27,13 @@ export default ({ navigation, route }) => {
     )
   }
 
-  const IoniconsHeaderButton = (props) => (
-    // the `props` here come from <Item ... />
-    // you may access them and pass something else to `HeaderButton` if you like
-    <HeaderButton IconComponent={Ionicons} iconSize={23} {...props} />
-  );
+  useHeaderRight(navigation,() => (
+    <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
+      <Item title="star" iconName="star" onPress={() => alert('star')} color={'white'}/>
+    </HeaderButtons>
+  ))
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerTitle: (props) => <LogoTitle {...props} />,
-      headerRight: () => (
-        <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-          <Item title="star" iconName="star" onPress={() => alert('star')} color={'white'}/>
-        </HeaderButtons>
-      ),
-    })
-  }, [navigation])
+  useHeaderTitle(navigation,(props) => <LogoTitle {...props} />)
 
   return (
     <ScrollView>
