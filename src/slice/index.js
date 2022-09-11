@@ -22,10 +22,29 @@ export const mealSlice = createSlice({
     incrementByAmount: (state, action) => {
       state.value += action.payload
     },
+    toggleFavorite : (state, action) => {
+      const mealId = action.payload
+      console.log('mealId', mealId)
+      const existingIndex = state.favoriteMeals.findIndex(
+        meal => meal.id === mealId
+      )
+      console.log('existingIndex: ',existingIndex)
+
+      if (existingIndex >= 0) {
+        const updateFavMeals = [...state.favoriteMeals]
+        updateFavMeals.splice(existingIndex, 1)
+        console.log({...state, favoriteMeals: updateFavMeals })
+        return {...state, favoriteMeals: updateFavMeals }
+      } else {
+        const meal = state.meals.find(meal => meal.id === action.mealId)
+        console.log({ ...state, favoriteMeals: state.favoriteMeals.concat(meal) })
+        return { ...state, favoriteMeals: state.favoriteMeals.concat(meal) }
+      }
+    }
   },
 })
 
-export const { increment, decrement, incrementByAmount } = mealSlice.actions
+export const { increment, decrement, incrementByAmount, toggleFavorite } = mealSlice.actions
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This

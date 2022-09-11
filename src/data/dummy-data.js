@@ -1,110 +1,128 @@
-import Category from "../models/category";
+import Category from '../models/category'
 import Meal from '../models/meal'
+import { faker } from '@faker-js/faker'
+
+faker.setLocale('zh_CN');
 
 
 export const CATEGORIES = [
-  new Category('c1', 'Italian', '#f5428d'),
-  new Category('c2', 'Quick & Easy', '#f54242'),
-  new Category('c3', 'Hamburgers', '#f5a442'),
-  new Category('c4', 'German', '#f5d142'),
-  new Category('c5', 'Light & Lovely', '#368dff')
+  {
+    id : 'c1',
+    title : 'Italian',
+    color : faker.color.rgb(),
+  },
+  {
+    id : 'c2',
+    title : 'Quick & Easy',
+    color : faker.color.rgb(),
+  },
+  {
+    id : 'c3',
+    title : 'Hamburgers',
+    color : faker.color.rgb(),
+  },
+  {
+    id : 'c4',
+    title : 'German',
+    color : faker.color.rgb(),
+  }
 ]
 
 export const MEALS = [
-  new Meal(
-    'm1',
-    ['c1'],
-    'Spaghetti with Tomato Sauce',
-    'affordable',
-    'simple',
-    'https://cdn.pixabay.com/photo/2018/07/11/21/51/toast-3532016_1280.jpg',
-    10,
-    [
+  {
+    id: 'm1',
+    categoryIds: ['c1'],
+    title: faker.word.adjective(),
+    affordability: 'affordable',
+    complexity: 'simple',
+    imageUrl:faker.image.food(),
+    duration: 10,
+    ingredients: [
       '1 Slice White Bread',
       '1 Slice Ham',
       '1 Slice Pineapple',
       '1-2 Slices of Cheese',
-      'Butter'
+      'Butter',
     ],
-    [
+    steps: [
       'Butter one side of the white bread',
-      'Layer ham, the pineapple and cheese on the white bread'
+      'Layer ham, the pineapple and cheese on the white bread',
     ],
-    true,
-    false,
-    true,
-    false
-  ),
-  new Meal(
-    'm1',
-    ['c2'],
-    'Spaghetti with Tomato Sauce',
-    'affordable',
-    'simple',
-    'https://cdn.pixabay.com/photo/2018/07/11/21/51/toast-3532016_1280.jpg',
-    10,
-    [
+    isGlutenFree: true,
+    isVegan: false,
+    isVegetarian: true,
+    isLactoseFree: false,
+  },
+  {
+    id: 'm2',
+    categoryIds: ['c2'],
+    title: faker.word.adjective(),
+    affordability: 'affordable',
+    complexity: 'simple',
+    imageUrl:faker.image.food(),
+    duration: 10,
+    ingredients: [
       '1 Slice White Bread',
       '1 Slice Ham',
       '1 Slice Pineapple',
       '1-2 Slices of Cheese',
-      'Butter'
+      'Butter',
     ],
-    [
+    steps: [
       'Butter one side of the white bread',
-      'Layer ham, the pineapple and cheese on the white bread'
+      'Layer ham, the pineapple and cheese on the white bread',
     ],
-    true,
-    false,
-    true,
-    false
-  ),
-  new Meal(
-    'm1',
-    ['c3'],
-    'Spaghetti with Tomato Sauce',
-    'affordable',
-    'simple',
-    'https://cdn.pixabay.com/photo/2018/07/11/21/51/toast-3532016_1280.jpg',
-    10,
-    [
+    isGlutenFree: true,
+    isVegan: false,
+    isVegetarian: true,
+    isLactoseFree: false,
+  },
+  {
+    id: 'm3',
+    categoryIds: ['c3'],
+    title: faker.word.adjective(),
+    affordability: 'affordable',
+    complexity: 'simple',
+    imageUrl:faker.image.food(),
+    duration: 10,
+    ingredients: [
       '1 Slice White Bread',
       '1 Slice Ham',
       '1 Slice Pineapple',
       '1-2 Slices of Cheese',
-      'Butter'
+      'Butter',
     ],
-    [
+    steps: [
       'Butter one side of the white bread',
-      'Layer ham, the pineapple and cheese on the white bread'
+      'Layer ham, the pineapple and cheese on the white bread',
     ],
-    true,
-    false,
-    true,
-    false
-  ),
-  new Meal(
-    'm1',
-    ['c4'],
-    'Spaghetti with Tomato Sauce',
-    'affordable',
-    'simple',
-    'https://cdn.pixabay.com/photo/2018/07/11/21/51/toast-3532016_1280.jpg',
-    10,
-    [
+    isGlutenFree: true,
+    isVegan: false,
+    isVegetarian: true,
+    isLactoseFree: false,
+  },
+  {
+    id: 'm4',
+    categoryIds: ['c4'],
+    title: faker.word.adjective(),
+    affordability: 'affordable',
+    complexity: 'simple',
+    imageUrl:faker.image.food(),
+    duration: 10,
+    ingredients: [
       '1 Slice White Bread',
       '1 Slice Ham',
       '1 Slice Pineapple',
       '1-2 Slices of Cheese',
-      'Butter'
+      'Butter',
     ],
-    [
+    steps: [
       'Butter one side of the white bread',
-      'Layer ham, the pineapple and cheese on the white bread'
+      'Layer ham, the pineapple and cheese on the white bread',
     ],
-    true,
-    false,
-    true,
-    false
-  )
+    isGlutenFree: true,
+    isVegan: false,
+    isVegetarian: true,
+    isLactoseFree: false,
+  },
 ]

@@ -5,9 +5,12 @@ import { ScrollView } from 'react-native-gesture-handler'
 import DefaultText from '../components/DefaultText'
 import IoniconsHeaderButton from '../components/IoniconsHeaderButton'
 import useHeaderTitle from '../hooks/useHeaderTitle'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { meals } from '../slice'
 import useHeaderRight from '../hooks/useHeaderRight'
+import { toggleFavorite } from '../slice'
+import { useEffect } from 'react'
+import { useCallback } from 'react'
 
 const ListItem = ({ children }) => {
   return (
@@ -22,6 +25,13 @@ export default ({ navigation, route }) => {
   const availableMeals = useSelector(meals)
 
   const selectedMeal = availableMeals.find((meal) => meal.id === mealId)
+  console.log('mealId:', mealId)
+  console.log('selectedMeal:',selectedMeal)
+  const dispatch = useDispatch()
+
+  const toggleFavoriteHandler = useCallback(() => {
+    dispatch(toggleFavorite(mealId))
+  }, [dispatch, mealId])
 
 
   const LogoTitle = () => {
@@ -33,7 +43,7 @@ export default ({ navigation, route }) => {
       <Item
         title='star'
         iconName='star'
-        onPress={() => alert('star')}
+        onPress={toggleFavoriteHandler}
         color={'white'}
       />
     </HeaderButtons>
