@@ -6,7 +6,7 @@ import DefaultText from '../components/DefaultText'
 import IoniconsHeaderButton from '../components/IoniconsHeaderButton'
 import useHeaderTitle from '../hooks/useHeaderTitle'
 import { useDispatch, useSelector } from 'react-redux'
-import { meals } from '../slice'
+import { favoriteMeals, meals } from '../slice'
 import useHeaderRight from '../hooks/useHeaderRight'
 import { toggleFavorite } from '../slice'
 import { useEffect } from 'react'
@@ -23,14 +23,15 @@ const ListItem = ({ children }) => {
 export default ({ navigation, route }) => {
   const { mealId } = route.params
   const availableMeals = useSelector(meals)
-
+  const favMeals = useSelector(favoriteMeals)
+  const currentMealIsFavorite = favMeals.some(meal => meal.id === mealId)
   const selectedMeal = availableMeals.find((meal) => meal.id === mealId)
-  console.log('mealId:', mealId)
-  console.log('selectedMeal:',selectedMeal)
+  // console.log('mealId:', mealId)
+  // console.log('selectedMeal:',selectedMeal)
   const dispatch = useDispatch()
 
   const toggleFavoriteHandler = useCallback(() => {
-    dispatch(toggleFavorite(mealId))
+    dispatch(toggleFavorite(selectedMeal))
   }, [dispatch, mealId])
 
 
@@ -42,7 +43,7 @@ export default ({ navigation, route }) => {
     <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
       <Item
         title='star'
-        iconName='star'
+        iconName={currentMealIsFavorite ? 'star' : 'star-outline'}
         onPress={toggleFavoriteHandler}
         color={'white'}
       />

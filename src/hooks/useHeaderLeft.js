@@ -6,5 +6,5 @@ export default (navigation,View) => {
     navigation.setOptions({
       headerLeft: View,
     })
-  }, [navigation])
+  }, [navigation,View])
 }

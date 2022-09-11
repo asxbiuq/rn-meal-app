@@ -23,21 +23,24 @@ export const mealSlice = createSlice({
       state.value += action.payload
     },
     toggleFavorite : (state, action) => {
-      const mealId = action.payload
-      console.log('mealId', mealId)
+      const selectedMeal = action.payload
+      // console.log('selectedMeal', selectedMeal)
       const existingIndex = state.favoriteMeals.findIndex(
-        meal => meal.id === mealId
+        meal => meal.id === selectedMeal.id
       )
-      console.log('existingIndex: ',existingIndex)
+      // console.log('existingIndex: ',existingIndex)
 
       if (existingIndex >= 0) {
         const updateFavMeals = [...state.favoriteMeals]
         updateFavMeals.splice(existingIndex, 1)
-        console.log({...state, favoriteMeals: updateFavMeals })
+        console.log('取消收藏')
         return {...state, favoriteMeals: updateFavMeals }
       } else {
-        const meal = state.meals.find(meal => meal.id === action.mealId)
-        console.log({ ...state, favoriteMeals: state.favoriteMeals.concat(meal) })
+        // console.log('state.meals',state.meals)
+        const meal = selectedMeal
+        // console.log('meal',meal)
+        // console.log({ ...state, favoriteMeals: state.favoriteMeals.concat(meal) })
+        console.log('添加收藏')
         return { ...state, favoriteMeals: state.favoriteMeals.concat(meal) }
       }
     }
