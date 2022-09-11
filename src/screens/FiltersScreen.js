@@ -1,78 +1,64 @@
-import { View, Text, StyleSheet } from "react-native";
-import { useEffect, useState, useCallback } from "react";
-import useHeaderTitle from "../hooks/useHeaderTitle";
-import IoniconsHeaderButton from "../components/IoniconsHeaderButton";
-import { HeaderButtons,Item } from 'react-navigation-header-buttons';
-import useHeaderRight from "../hooks/useHeaderRight";
-import FilterSwitch from "../components/FilterSwitch";
-import { useDispatch } from "react-redux";
-import { setFilters } from "../slice";
-import useHeaderLeft from "../hooks/useHeaderLeft";
-import { AntDesign } from '@expo/vector-icons';
+import { View, Text, StyleSheet } from 'react-native'
+import { useEffect, useState, useCallback } from 'react'
+import useHeaderTitle from '../hooks/useHeaderTitle'
+import IoniconsHeaderButton from '../components/IoniconsHeaderButton'
+import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+import useHeaderRight from '../hooks/useHeaderRight'
+import FilterSwitch from '../components/FilterSwitch'
+import { useDispatch } from 'react-redux'
+import { setFilters } from '../slice'
+import useHeaderLeft from '../hooks/useHeaderLeft'
+import { AntDesign } from '@expo/vector-icons'
 
-export default ({ navigation, route }) => {
+export default ({ navigation }) => {
   const [isGlutenFree, setIsGlutenFree] = useState(false)
   const [isLactoseFree, setIsLactoseFree] = useState(false)
   const [isVegan, setIsVegan] = useState(false)
 
   const dispatch = useDispatch()
 
-
-  const saveFilters = useCallback(() => {
+  useEffect(() => {
     const appliedFilters = {
       glutenFree: isGlutenFree,
       lactoseFree: isLactoseFree,
-      vegan: isVegan
+      vegan: isVegan,
     }
 
     dispatch(setFilters(appliedFilters))
   }, [isGlutenFree, isLactoseFree, isVegan, dispatch])
 
-  useEffect(()=>{
-    navigation.setParams({save: saveFilters})
-  }, [saveFilters])
+  useHeaderTitle(navigation, () => <Text>Filter Meal</Text>)
 
-  useHeaderTitle(navigation,() => <Text>Filter Meal</Text>)
-  
-  useHeaderRight(navigation, () => (
+  useHeaderLeft(navigation, () => (
     <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-      <Item 
-        title="save" 
-        iconName="save" 
+      <AntDesign
+        name='leftcircleo'
+        size={24}
+        color='black'
         onPress={() => {
-          console.log(route.params)
+          navigation.navigate('Categories')
         }}
       />
     </HeaderButtons>
   ))
 
-  useHeaderLeft(navigation, () => (
-    <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-      <AntDesign name="leftcircleo" size={24} color="black" onPress={() => {
-           navigation.navigate('Categories')
-      }}/>
-    </HeaderButtons>
-  ))
-
-
-
-  return(
+  return (
     <View style={styles.screen}>
       <Text style={styles.title}>Available Filters / Restrictions</Text>
-      <FilterSwitch 
-        label='Gluten-free' 
-        state={isGlutenFree} 
-        onChange={newValue => setIsGlutenFree(newValue)}
+      <FilterSwitch
+        label='Gluten-free'
+        state={isGlutenFree}
+        onChange={(newValue) => setIsGlutenFree(newValue)}
       />
-      <FilterSwitch 
-        label='Lactose-free' 
-        state={isLactoseFree} 
-        onChange={newValue => setIsLactoseFree(newValue)}
+      <FilterSwitch
+        label='Lactose-free'
+        state={isLactoseFree}
+        onChange={(newValue) => setIsLactoseFree(newValue)}
       />
-      <FilterSwitch 
+      <FilterSwitch
         label='Vegan'
         state={isVegan}
-        onChange={newValue => setIsVegan(newValue)}
+        onChange={(newValue) => setIsVegan(newValue)}
       />
     </View>
   )
@@ -81,19 +67,19 @@ export default ({ navigation, route }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   title: {
     fontFamily: 'open-sans-bold',
     fontSize: 22,
     margin: 20,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   filterContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '80%',
-    marginVertical: 15
+    marginVertical: 15,
   },
 })

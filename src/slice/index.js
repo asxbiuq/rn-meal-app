@@ -29,6 +29,7 @@ export const mealSlice = createSlice({
 
     setFilters: (state, action) => {
       const appliedFilters = action.payload
+      console.log('appliedFilters', appliedFilters)
 
       const updatedFilteredMeals = state.meals.filter((meal) => {
         if (appliedFilters.glutenFree && !meal.isGlutenFree) {
