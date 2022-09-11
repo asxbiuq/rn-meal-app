@@ -1,11 +1,11 @@
 import { View, StyleSheet, FlatList } from "react-native"
-import MealItem from "../components/MealItem";
+import MealItem from "./MealItem";
 
 
 export default ({ listData, navigation }) => {
   const renderMealItem = itemData => {
 
-    const {title, imageUrl, duration, complexity, affordability} = itemData.item
+    const { id, title, imageUrl, duration, complexity, affordability } = itemData.item
     
     return (
       <MealItem 
@@ -19,7 +19,8 @@ export default ({ listData, navigation }) => {
           navigation.navigate({
             name: 'MealDetail',
             params: { 
-              mealId: itemData.item.id 
+              mealId: id,
+              mealTitle: title
             }
           })
         }} 
