@@ -9,26 +9,11 @@ export const mealSlice = createSlice({
     favoriteMeals: []
   },
   reducers: {
-    increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1
-    },
-    decrement: (state) => {
-      state.value -= 1
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload
-    },
     toggleFavorite : (state, action) => {
       const selectedMeal = action.payload
-      // console.log('selectedMeal', selectedMeal)
       const existingIndex = state.favoriteMeals.findIndex(
         meal => meal.id === selectedMeal.id
       )
-      // console.log('existingIndex: ',existingIndex)
 
       if (existingIndex >= 0) {
         const updateFavMeals = [...state.favoriteMeals]
@@ -36,18 +21,37 @@ export const mealSlice = createSlice({
         console.log('取消收藏')
         return {...state, favoriteMeals: updateFavMeals }
       } else {
-        // console.log('state.meals',state.meals)
         const meal = selectedMeal
-        // console.log('meal',meal)
-        // console.log({ ...state, favoriteMeals: state.favoriteMeals.concat(meal) })
         console.log('添加收藏')
         return { ...state, favoriteMeals: state.favoriteMeals.concat(meal) }
       }
+    },
+
+    setFilters: (state, action) => {
+      const appliedFilters = action.payload
+
+      const updatedFilteredMeals = state.meals.filter((meal) => {
+        if (appliedFilters.glutenFree && !meal.isGlutenFree) {
+          return false
+        }
+        if (appliedFilters.lactoseFree && !meal.isGlutenFree) {
+          return false
+        }
+        if (appliedFilters.vegetarian && !meal.isVegetarian) {
+          return false
+        }
+        if (appliedFilters.vegan && !meal.isVegan) {
+          return false
+        }
+        return true
+      })
+
+      return { ...state, filteredMeals: updatedFilteredMeals}
     }
   },
 })
 
-export const { increment, decrement, incrementByAmount, toggleFavorite } = mealSlice.actions
+export const { toggleFavorite, setFilters } = mealSlice.actions
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This

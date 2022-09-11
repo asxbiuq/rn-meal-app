@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import MealList from '../components/MealList'
 import { MEALS } from '../data/dummy-data'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
@@ -10,6 +10,13 @@ import { favoriteMeals } from '../slice'
 export default ({ navigation }) => {
   const favMeals = useSelector(favoriteMeals)
 
+  if (favMeals.length === 0 || !favMeals) {
+    return (
+      <View style={styles.content}>
+        <Text>No favorite meals found. Start adding some!</Text>
+      </View>
+    )
+  }
 
   useHeaderLeft(navigation, () => (
     <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
@@ -25,9 +32,9 @@ export default ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
-  screen: {
+  content: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-  },
+    alignItems: 'center'
+  }
 })

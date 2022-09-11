@@ -5,13 +5,16 @@ import IoniconsHeaderButton from "../components/IoniconsHeaderButton";
 import { HeaderButtons,Item } from 'react-navigation-header-buttons';
 import useHeaderRight from "../hooks/useHeaderRight";
 import FilterSwitch from "../components/FilterSwitch";
-
+import { useDispatch } from "react-redux";
+import { setFilters } from "../slice";
 
 
 export default ({ navigation, route }) => {
   const [isGlutenFree, setIsGlutenFree] = useState(false)
   const [isLactoseFree, setIsLactoseFree] = useState(false)
   const [isVegan, setIsVegan] = useState(false)
+
+  const dispatch = useDispatch()
 
 
   const saveFilters = useCallback(() => {
@@ -21,8 +24,8 @@ export default ({ navigation, route }) => {
       vegan: isVegan
     }
 
-    console.log(appliedFilters)
-  }, [isGlutenFree, isLactoseFree, isVegan])
+    dispatch(setFilters(appliedFilters))
+  }, [isGlutenFree, isLactoseFree, isVegan, dispatch])
 
   useEffect(()=>{
     navigation.setParams({save: saveFilters})

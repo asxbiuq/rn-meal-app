@@ -1,40 +1,46 @@
-import { View, StyleSheet, FlatList } from "react-native"
-import MealItem from "./MealItem";
-
+import { View, StyleSheet, FlatList } from 'react-native'
+import { useSelector } from 'react-redux'
+import { favoriteMeals } from '../slice'
+import MealItem from './MealItem'
 
 export default ({ listData, navigation }) => {
-  const renderMealItem = itemData => {
+  const favMeals = useSelector(favoriteMeals)
+  
+  const renderMealItem = (itemData) => {
+    const { id, title, imageUrl, duration, complexity, affordability } =
+      itemData.item
 
-    const { id, title, imageUrl, duration, complexity, affordability } = itemData.item
-    
+    const isFav = favMeals.some((meal) => meal.id === id)
+
     return (
-      <MealItem 
+      <MealItem
         navigation={navigation}
-        title={title} 
+        title={title}
         imageUrl={imageUrl}
         duration={duration}
         complexity={complexity}
         affordability={affordability}
-        onSelectMeal={()=>{
+        onSelectMeal={() => {
           navigation.navigate({
             name: 'MealDetail',
-            params: { 
+            params: {
               mealId: id,
-              mealTitle: title
-            }
+              mealTitle: title,
+              isFav: isFav,
+            },
           })
-        }} 
+        }}
       />
     )
   }
 
   return (
     <View style={styles.list}>
-      <FlatList 
+      <FlatList
         data={listData}
         keyExtractor={(item, index) => item.id}
         renderItem={renderMealItem}
-        style={{width: '90%'}}
+        style={{ width: '90%' }}
       />
     </View>
   )
@@ -45,5 +51,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
 })
