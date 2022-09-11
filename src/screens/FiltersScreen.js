@@ -7,7 +7,8 @@ import useHeaderRight from "../hooks/useHeaderRight";
 import FilterSwitch from "../components/FilterSwitch";
 import { useDispatch } from "react-redux";
 import { setFilters } from "../slice";
-
+import useHeaderLeft from "../hooks/useHeaderLeft";
+import { AntDesign } from '@expo/vector-icons';
 
 export default ({ navigation, route }) => {
   const [isGlutenFree, setIsGlutenFree] = useState(false)
@@ -42,6 +43,14 @@ export default ({ navigation, route }) => {
           console.log(route.params)
         }}
       />
+    </HeaderButtons>
+  ))
+
+  useHeaderLeft(navigation, () => (
+    <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
+      <AntDesign name="leftcircleo" size={24} color="black" onPress={() => {
+           navigation.navigate('Categories')
+      }}/>
     </HeaderButtons>
   ))
 
