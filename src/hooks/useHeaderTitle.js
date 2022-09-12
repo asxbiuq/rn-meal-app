@@ -1,9 +1,12 @@
 import { useLayoutEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
 
-export default (navigation,View) => {
+export default (View) => {
+  const navigation = useNavigation()
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: View
     })
-  }, [navigation,View])
+  }, [View])
 }

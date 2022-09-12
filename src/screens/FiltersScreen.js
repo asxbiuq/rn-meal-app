@@ -27,9 +27,9 @@ export default ({ navigation }) => {
     dispatch(setFilters(appliedFilters))
   }, [isGlutenFree, isLactoseFree, isVegan, dispatch])
 
-  useHeaderTitle(navigation, () => <Text>Filter Meal</Text>)
+  useHeaderTitle(() => <Text>Filter Meal</Text>)
 
-  useHeaderLeft(navigation, () => (
+  useHeaderLeft(() => (
     <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
       <AntDesign
         name='leftcircleo'

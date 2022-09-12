@@ -8,7 +8,7 @@ import IoniconsHeaderButton from "../components/IoniconsHeaderButton";
 
 export default ({ navigation }) => {
 
-  useHeaderLeft(navigation,() => (
+  useHeaderLeft(() => (
     <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
       <Item title="menu" iconName="menu" onPress={() => navigation.toggleDrawer()} />
     </HeaderButtons>

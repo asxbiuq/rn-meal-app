@@ -18,7 +18,7 @@ export default ({ navigation }) => {
     )
   }
 
-  useHeaderLeft(navigation, () => (
+  useHeaderLeft(() => (
     <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
       <Item
         title='menu'
